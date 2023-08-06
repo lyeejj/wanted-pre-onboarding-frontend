@@ -1,13 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Todo from "./pages/Todo";
 import AuthRoute from "./components/AuthRoute";
 import PublicRoute from "./components/PublicRoute";
+import MainLayout from "./components/layout/MainLayout";
 
 const App = () => (
-  <BrowserRouter>
+  <MainLayout>
     <Routes>
       <Route element={<PublicRoute />}>
         <Route path="/" element={<Home />} />
@@ -18,7 +19,7 @@ const App = () => (
         <Route path="/todo" element={<Todo />} />
       </Route>
     </Routes>
-  </BrowserRouter>
+  </MainLayout>
 );
 
 export default App;
