@@ -1,4 +1,4 @@
-import axiosInstance from "axios";
+import axiosInstance from "./instance";
 
 export const signin = async (data) => {
   try {
@@ -8,7 +8,7 @@ export const signin = async (data) => {
   } catch (error) {
     if (error.response) {
       console.log(error.response);
-      alert("로그인에 문제가 발생했습니다. 다시 시도해주세요.");
+      alert("로그인 정보가 올바르지 않습니다. 다시 시도해주세요.");
     }
   }
 };
@@ -21,7 +21,8 @@ export const signup = async (data) => {
   } catch (error) {
     if (error.response) {
       console.log(error.response);
-      alert("회원가입에 문제가 발생했습니다. 입력 정보를 확인해주세요.");
+      if (error.response.status === 400) alert(error.response.data.message);
+      else alert("회원가입에 문제가 발생했습니다. 입력 정보를 확인해주세요.");
     }
   }
 };
