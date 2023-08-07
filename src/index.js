@@ -5,15 +5,18 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/theme";
 import { BrowserRouter } from "react-router-dom";
+import { TodoProvider } from "./context/TodoContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={Theme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ThemeProvider>
+    <TodoProvider>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </TodoProvider>
   </React.StrictMode>
 );
