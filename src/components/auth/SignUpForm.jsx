@@ -9,12 +9,21 @@ const SignUpForm = () => {
 
   const validateBtn = !(email.includes("@") && password.length >= 8);
 
-  const handleSignUpSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    signup(formData);
-    reset();
+  const handleSignUpSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      console.log(formData);
+      await signup(formData);
+      reset();
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+        if (error.response.status === 400) alert(error.response.data.message);
+        else alert("회원가입에 문제가 발생했습니다. 입력 정보를 확인해주세요.");
+      }
+    }
   };
+
   return (
     <S.FormTemplate>
       <S.FormWrapper onSubmit={handleSignUpSubmit}>

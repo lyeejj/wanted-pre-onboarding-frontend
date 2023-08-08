@@ -10,11 +10,17 @@ const SignInForm = () => {
 
   const validateBtn = !(email.includes("@") && password.length >= 8);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    signin(formData);
-    reset();
+  const handleLoginSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await signin(formData);
+      reset();
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response);
+        alert("로그인 정보가 올바르지 않습니다. 다시 시도해주세요.");
+      }
+    }
   };
 
   return (
