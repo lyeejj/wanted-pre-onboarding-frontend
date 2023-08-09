@@ -25,7 +25,7 @@ export const TodoProvider = ({ children }) => {
   const handleAddTodo = async (todoInput) => {
     try {
       const newTodo = await createTodo(todoInput);
-      dispatch({ type: "FETCH_TODOS", payload: newTodo });
+      dispatch({ type: "ADD_TODO", payload: newTodo });
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
