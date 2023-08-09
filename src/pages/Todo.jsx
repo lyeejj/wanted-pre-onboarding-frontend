@@ -1,20 +1,42 @@
+import { useState, useEffect } from "react";
+import { useTodoContext } from "../context/TodoContext";
+import TodoItem from "../components/todo/TodoItem";
+
 const Todo = () => {
+  const [todoInput, setTodoInput] = useState("");
+  const { todos, fetchTodos, handleAddTodo } = useTodoContext();
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  const handleChange = (e) => {
+    setTodoInput(e.target.value);
+  };
+
+  const onClickAddTodo = (e) => {
+    e.preventDefault();
+    console.log(todoInput);
+    handleAddTodo({ todo: todoInput });
+  };
+
   return (
     <>
       <h1>Todo List</h1>
-      <input data-testid="new-todo-input" />
-      <button data-testid="new-todo-add-button">추가</button>
-
-      <ul>
-        <li>
-          <label>
-            <input type="checkbox" />
-            <span>TODO 1</span>
-          </label>
-          <button data-testid="modify-button">수정</button>
-          <button data-testid="delete-button">삭제</button>
-        </li>
-      </ul>
+      <form onSubmit={onClickAddTodo}>
+        <input
+          data-testid="new-todo-input"
+          id="new-todo-input"
+          name="new-todo-input"
+          value={todoInput}
+          onChange={handleChange}
+        />
+        <button data-testid="new-todo-add-button" type="submit">
+          추가
+        </button>
+      </form>
+      {todos.length &&
+        todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
     </>
   );
 };
