@@ -14,7 +14,11 @@ export const todoReducer = (state, action) => {
         ...state,
         todos: state.todos.map((todo) =>
           todo.id === action.payload.id
-            ? { ...todo, todo: action.payload.updateTodo }
+            ? {
+                ...todo,
+                todo: action.payload.updatedTodo,
+                isCompleted: action.payload.isCompleted,
+              }
             : todo
         ),
       };

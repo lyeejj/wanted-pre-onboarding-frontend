@@ -35,8 +35,11 @@ export const TodoProvider = ({ children }) => {
 
   const handleUpdateTodo = async (id, data) => {
     try {
-      const updatedTodo = await updateTodo(id, data);
-      dispatch({ type: "UPDATE_TODO", payload: { id, updatedTodo } });
+      const { todo: updatedTodo, isCompleted } = await updateTodo(id, data);
+      dispatch({
+        type: "UPDATE_TODO",
+        payload: { id, updatedTodo, isCompleted },
+      });
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
