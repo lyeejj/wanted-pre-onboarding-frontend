@@ -47,7 +47,6 @@ const Container = styled.div`
   max-width: 1200px;
   height: 100vh;
   margin: 0 auto;
-  /* background-color: #e8f6d0; */
 `;
 
 const Header = styled.header`
@@ -56,6 +55,7 @@ const Header = styled.header`
   align-items: center;
   padding: 12px;
   font-size: 1.3rem;
+  position: relative;
 `;
 
 const UserIcon = styled.div`
@@ -66,7 +66,7 @@ const UserIcon = styled.div`
 const Dropdown = styled.div`
   position: absolute;
   top: 50px;
-  right: 80px;
+  right: -30px;
   font-size: 1rem;
   padding: 6px 8px;
   background-color: #fff;
