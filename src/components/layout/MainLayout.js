@@ -14,13 +14,6 @@ const MainLayout = ({ children }) => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const goHome = () => {
-    navigate("/");
-  };
-  const goTodo = () => {
-    navigate("/todo");
-  };
-
   const handleLogout = () => {
     logout();
     setIsLoggedIn(false);
@@ -33,24 +26,16 @@ const MainLayout = ({ children }) => {
       <Header>
         <h1>TodoApp</h1>
         {isLoggedIn && (
-          <>
-            <Navbar>
-              <ul>
-                <li onClick={goHome}>Home</li>
-                <li onClick={goTodo}>Todo</li>
-              </ul>
-            </Navbar>
-            <UserIcon>
-              <FaRegUser onClick={() => setShowDropdown((prev) => !prev)} />
-              {showDropdown && (
-                <Dropdown>
-                  <ul>
-                    <li onClick={handleLogout}>로그아웃</li>
-                  </ul>
-                </Dropdown>
-              )}
-            </UserIcon>
-          </>
+          <UserIcon>
+            <FaRegUser onClick={() => setShowDropdown((prev) => !prev)} />
+            {showDropdown && (
+              <Dropdown>
+                <ul>
+                  <li onClick={handleLogout}>로그아웃</li>
+                </ul>
+              </Dropdown>
+            )}
+          </UserIcon>
         )}
       </Header>
       {children}
@@ -72,18 +57,6 @@ const Header = styled.header`
   padding: 12px;
   margin-bottom: 8rem;
   font-size: 1.3rem;
-`;
-
-const Navbar = styled.nav`
-  ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-
-    li {
-      cursor: pointer;
-    }
-  }
 `;
 
 const UserIcon = styled.div`
