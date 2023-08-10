@@ -16,7 +16,6 @@ const Todo = () => {
 
   const onClickAddTodo = (e) => {
     e.preventDefault();
-    console.log(todoInput);
     handleAddTodo({ todo: todoInput });
   };
 
@@ -35,8 +34,10 @@ const Todo = () => {
           추가
         </button>
       </form>
-      {todos.length &&
-        todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+      <ul>
+        {todos.length &&
+          todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+      </ul>
     </>
   );
 };
