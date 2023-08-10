@@ -4,6 +4,7 @@ import { useTodoContext } from "../../context/TodoContext";
 const TodoItem = ({ todo }) => {
   const { id, todo: todoText, isCompleted } = todo;
   const [isEdit, setIsEdit] = useState(false);
+  const [editTodoInput, setEditTodoInput] = useState(todoText);
 
   const { handleUpdateTodo, handleDeleteTodo } = useTodoContext();
 
@@ -18,27 +19,67 @@ const TodoItem = ({ todo }) => {
     }
   };
 
+  const onClickEditStatus = () => {
+    setIsEdit(true);
+  };
+
+  const handleChange = (e) => {
+    setEditTodoInput(e.target.value);
+  };
+
+  const onClickSubmitBtn = () => {
+    handleUpdateTodo(id, { todo: editTodoInput, isCompleted });
+    setIsEdit(false);
+  };
+
+  const onClickCancleBtn = () => {
+    setEditTodoInput(todoText);
+    setIsEdit(false);
+  };
+
   return (
-    <ul>
-      <li>
-        <label>
+    <>
+      {!isEdit ? (
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              checked={isCompleted}
+              onChange={handleCheckBoxChange}
+            />
+            <span
+              style={{
+                textDecoration: isCompleted ? "line-through" : "none",
+              }}
+            >
+              {todoText}
+            </span>
+          </label>
+          <button data-testid="modify-button" onClick={onClickEditStatus}>
+            수정
+          </button>
+          <button data-testid="delete-button" onClick={onClickeRemoveTodo}>
+            삭제
+          </button>
+        </li>
+      ) : (
+        <li>
           <input
-            type="checkbox"
-            checked={isCompleted}
-            onChange={handleCheckBoxChange}
+            data-testid="modify-input"
+            id="modify-input"
+            name="modify-input"
+            value={editTodoInput}
+            onChange={handleChange}
           />
-          <span
-            style={{ textDecoration: isCompleted ? "line-through" : "none" }}
-          >
-            {todoText}
-          </span>
-        </label>
-        <button data-testid="modify-button">수정</button>
-        <button data-testid="delete-button" onClick={onClickeRemoveTodo}>
-          삭제
-        </button>
-      </li>
-    </ul>
+          <button data-testid="submit-button" onClick={onClickSubmitBtn}>
+            제출
+          </button>
+          <button data-testid="cancel-button" onClick={onClickCancleBtn}>
+            취소
+          </button>
+        </li>
+      )}
+    </>
   );
 };
 export default TodoItem;
