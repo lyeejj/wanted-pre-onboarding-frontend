@@ -3,8 +3,8 @@ import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Todo from "./pages/Todo";
-import AuthRoute from "./components/AuthRoute";
-import PublicRoute from "./components/PublicRoute";
+import AuthRoute from "./components/route/AuthRoute";
+import PublicRoute from "./components/route/PublicRoute";
 import MainLayout from "./components/layout/MainLayout";
 
 const App = () => (
