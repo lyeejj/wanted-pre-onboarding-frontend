@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const FormTemplate = styled.div`
   padding: 20px;
-  margin: 0 auto;
+  margin: 8rem auto;
   max-width: 640px;
   height: 50vh;
   background-color: #fff;

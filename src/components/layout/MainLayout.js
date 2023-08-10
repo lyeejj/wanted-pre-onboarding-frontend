@@ -55,7 +55,6 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  margin-bottom: 8rem;
   font-size: 1.3rem;
 `;
 
