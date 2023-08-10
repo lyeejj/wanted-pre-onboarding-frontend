@@ -34,6 +34,7 @@ const SignInForm = () => {
             onChange={handleChange}
             value={email}
             placeholder="이메일 아이디"
+            autoComplete="off"
           />
           <input
             data-testid="password-input"

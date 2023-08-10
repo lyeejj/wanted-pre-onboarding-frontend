@@ -36,14 +36,16 @@ const TodoList = () => {
           name="new-todo-input"
           value={todoInput}
           onChange={handleChange}
+          autoComplete="off"
         />
         <button data-testid="new-todo-add-button" type="submit">
           추가
         </button>
       </TodoForm>
       <TodoListContainer>
-        {todos.length &&
-          todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
       </TodoListContainer>
     </TodoListTemplate>
   );
