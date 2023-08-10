@@ -1,14 +1,21 @@
+import { useState } from "react";
 import { useTodoContext } from "../../context/TodoContext";
 
 const TodoItem = ({ todo }) => {
   const { id, todo: todoText, isCompleted } = todo;
+  const [isEdit, setIsEdit] = useState(false);
 
   const { handleUpdateTodo, handleDeleteTodo } = useTodoContext();
 
   const handleCheckBoxChange = async (e) => {
     const isChecked = e.target.checked;
-    console.log(isChecked);
     handleUpdateTodo(id, { todo: todoText, isCompleted: isChecked });
+  };
+
+  const onClickeRemoveTodo = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      handleDeleteTodo(id);
+    }
   };
 
   return (
@@ -27,7 +34,9 @@ const TodoItem = ({ todo }) => {
           </span>
         </label>
         <button data-testid="modify-button">수정</button>
-        <button data-testid="delete-button">삭제</button>
+        <button data-testid="delete-button" onClick={onClickeRemoveTodo}>
+          삭제
+        </button>
       </li>
     </ul>
   );
