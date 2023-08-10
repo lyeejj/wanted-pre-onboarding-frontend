@@ -23,6 +23,7 @@ const TodoList = () => {
   const onClickAddTodo = (e) => {
     e.preventDefault();
     handleAddTodo({ todo: todoInput });
+    setTodoInput("");
   };
 
   return (
