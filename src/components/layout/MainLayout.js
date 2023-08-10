@@ -1,24 +1,57 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { FaRegUser } from "react-icons/fa";
+import { logout } from "../../lib/apis/auth";
 
 const MainLayout = ({ children }) => {
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   const goHome = () => {
     navigate("/");
   };
   const goTodo = () => {
     navigate("/todo");
   };
+
+  const handleLogout = () => {
+    logout();
+    setIsLoggedIn(false);
+    setShowDropdown(false);
+    navigate("/signin");
+  };
+
   return (
     <Container>
       <Header>
         <h1>TodoApp</h1>
-        <Navbar>
-          <ul>
-            <li onClick={goHome}>Home</li>
-            <li onClick={goTodo}>Todo</li>
-          </ul>
-        </Navbar>
+        {isLoggedIn && (
+          <>
+            <Navbar>
+              <ul>
+                <li onClick={goHome}>Home</li>
+                <li onClick={goTodo}>Todo</li>
+              </ul>
+            </Navbar>
+            <UserIcon>
+              <FaRegUser onClick={() => setShowDropdown((prev) => !prev)} />
+              {showDropdown && (
+                <Dropdown>
+                  <ul>
+                    <li onClick={handleLogout}>로그아웃</li>
+                  </ul>
+                </Dropdown>
+              )}
+            </UserIcon>
+          </>
+        )}
       </Header>
       {children}
     </Container>
@@ -51,6 +84,23 @@ const Navbar = styled.nav`
       cursor: pointer;
     }
   }
+`;
+
+const UserIcon = styled.div`
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  font-size: 1rem;
+  padding: 6px 8px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 export default MainLayout;
