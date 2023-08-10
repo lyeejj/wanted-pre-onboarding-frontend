@@ -68,6 +68,7 @@ const TodoItem = ({ todo }) => {
             data-testid="modify-input"
             id="modify-input"
             name="modify-input"
+            type="text"
             value={editTodoInput}
             onChange={handleChange}
           />
