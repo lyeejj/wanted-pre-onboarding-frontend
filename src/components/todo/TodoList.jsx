@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { useTodoContext } from "../../context/TodoContext";
 import TodoItem from "./TodoItem";
+import {
+  TodoListTemplate,
+  Title,
+  TodoForm,
+  TodoListContainer,
+} from "./TodoStyles";
 
 const TodoList = () => {
   const [todoInput, setTodoInput] = useState("");
@@ -20,9 +26,9 @@ const TodoList = () => {
   };
 
   return (
-    <>
-      <h1>Todo List</h1>
-      <form onSubmit={onClickAddTodo}>
+    <TodoListTemplate>
+      <Title>Todo List</Title>
+      <TodoForm onSubmit={onClickAddTodo}>
         <input
           data-testid="new-todo-input"
           id="new-todo-input"
@@ -33,12 +39,13 @@ const TodoList = () => {
         <button data-testid="new-todo-add-button" type="submit">
           추가
         </button>
-      </form>
-      <ul>
+      </TodoForm>
+      <TodoListContainer>
         {todos.length &&
           todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
-      </ul>
-    </>
+      </TodoListContainer>
+    </TodoListTemplate>
   );
 };
+
 export default TodoList;
