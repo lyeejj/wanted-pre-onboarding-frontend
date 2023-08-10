@@ -11,6 +11,7 @@ npm start
 ## 기술 스택
 - React
 - Styled-components
+- Context API
 - axios
 
 ## 프로젝트 구조
